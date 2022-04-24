@@ -9,13 +9,6 @@ import java.util.List;
 
 public class ValidationUtils extends IllegalArgumentException{
 
-    public static final String DELIMITER = ",";
-    public static final String NAME_TYPE_ERR_MSG = "이름을 정확히 입력해주세요.";
-    public static final String OVER_MAX_LENGTH_MSG = "이름이 5글자를 초과합니다.";
-    public static final String NO_NAME_MSG = "입력된 이름이 없습니다.";
-    public static final String NAME_DUP_MSG = "중복된 이름이 입력되었습니다.";
-    public static final String REPEAT_COUNT_ERR_MSG = "반복횟수를 잘못 입력하였습니다.";
-
     public boolean validName(String userInput) {
         List<String> nameList = new ArrayList<>();
 
@@ -39,11 +32,11 @@ public class ValidationUtils extends IllegalArgumentException{
     }
 
     private boolean splitNameList(String name, List<String> nameList) {
-        return Collections.addAll(nameList, name.split(DELIMITER));
+        return Collections.addAll(nameList, name.split(ValidCommonConditionEnum.DELIMITER.getValue()));
     }
 
     private void validNameValue(List<String> nameList){
-        ErrorMessage.checkError(nameList.size() == 0, NAME_TYPE_ERR_MSG);
+        ErrorMessage.checkError(nameList.size() == 0, ErrorMsgEnum.NAME_TYPE_ERR_MSG);
     }
 
     private void validNameLength(List<String> nameList) {
@@ -54,28 +47,33 @@ public class ValidationUtils extends IllegalArgumentException{
     }
 
     private void validNameMaxLength(String name) {
-        ErrorMessage.checkError(name.length() > 5, OVER_MAX_LENGTH_MSG);
+        ErrorMessage.checkError(name.length() > 5, ErrorMsgEnum.OVER_MAX_LENGTH_MSG);
     }
 
     private void validNameZeroValue(String name) {
-        ErrorMessage.checkError(name.length() == 0, NO_NAME_MSG);
+        ErrorMessage.checkError(name.length() == 0, ErrorMsgEnum.NO_NAME_MSG);
     }
 
 
     private void validNameDuplicate(List<String> nameList) {
         HashSet<String> hs = new HashSet<>();
         for (String name : nameList) {
-            ErrorMessage.checkError(!hs.add(name.toUpperCase()), NAME_DUP_MSG);
+            ErrorMessage.checkError(!hs.add(name.toUpperCase()), ErrorMsgEnum.NAME_DUP_MSG);
         }
     }
 
-   public boolean validRepeat(String repeatCnt) throws IllegalArgumentException {
+   public boolean validRepeat(String repeatCnt) {
         try {
-            ErrorMessage.checkError(!(!repeatCnt.isEmpty() && !(Integer.parseInt(repeatCnt) < 1)), REPEAT_COUNT_ERR_MSG);
+            ErrorMessage.checkError(repeatCnt.isEmpty() || !checkNumFormat(repeatCnt) , ErrorMsgEnum.REPEAT_COUNT_ERR_MSG);
         } catch(IllegalArgumentException e) {
             System.out.println(e.toString());
             return false;
         }
         return true;
     }
+
+    private boolean checkNumFormat(String repeatCnt) {
+        return repeatCnt.matches(ValidCommonConditionEnum.REGEX_NUM.getValue());
+    }
+
 }
