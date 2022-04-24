@@ -3,14 +3,14 @@ package racingcar.domain;
 import racingcar.utils.GenerateRandomNumUtils;
 
 public class CarInfo {
+    public static final int MIN_VALUE = 0;
+    public static final int MOVING_FORWARD = 4;
     private String name;
     private int forwardCount;
 
-    public static final int MOVING_FORWARD = 4;
-
     public CarInfo(String carName){
         this.name = carName;
-        this.forwardCount = 0;
+        this.forwardCount = MIN_VALUE;
     }
 
     public String getName() {
@@ -36,9 +36,7 @@ public class CarInfo {
     }
 
     private boolean isForward() {
-        int b = generateRandomForwardNum();
-        System.out.println("gen random num = "+b);
-        return b >= MOVING_FORWARD;
+        return generateRandomForwardNum() >= MOVING_FORWARD;
     }
 
     private int generateRandomForwardNum() {
