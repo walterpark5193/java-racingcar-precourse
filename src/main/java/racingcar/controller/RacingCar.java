@@ -6,34 +6,32 @@ import racingcar.view.InputView;
 
 public class RacingCar {
 
-    String userInputCarNames;
-    String playRepeatCount;
+    private ManageCar manageCar;
+    private String userInputCarNames;
+    private String playRepeatCount;
 
     public void startGame(){
         initGameInfo();
         makeCarInfoList();
+        playRacingGame();
     }
 
     private void initGameInfo() {
         do {
-            this.userInputCarNames = readCarsName();
-        } while (new ValidationUtils().validName(userInputCarNames));
+            this.userInputCarNames = InputView.getCarsNameInput();
+        } while (!new ValidationUtils().validName(userInputCarNames));
 
         do {
-            playRepeatCount = readRepeatCount();
-        } while (ValidationUtils.validRepeat(playRepeatCount));
+            playRepeatCount = InputView.getPlayRepeatInput();
+        } while (!ValidationUtils.validRepeat(playRepeatCount));
     }
 
     public void makeCarInfoList() {
-        new ManageCar(userInputCarNames, playRepeatCount);
+        manageCar = new ManageCar(userInputCarNames, playRepeatCount);
     }
 
-    private String readCarsName() {
-        return InputView.getCarsNameInput();
-    }
-
-    private String readRepeatCount() {
-        return InputView.getPlayRepeatnput();
+    private void playRacingGame() {
+        manageCar.playGame();
     }
 
 }
