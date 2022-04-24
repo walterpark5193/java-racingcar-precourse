@@ -64,7 +64,7 @@ public class ValidationUtils extends IllegalArgumentException{
 
    public boolean validRepeat(String repeatCnt) {
         try {
-            ErrorMessage.checkError(repeatCnt.isEmpty() || !checkNumFormat(repeatCnt) , ErrorMsgEnum.REPEAT_COUNT_ERR_MSG);
+            ErrorMessage.checkError(repeatCnt.isEmpty() || !checkNumFormat(repeatCnt) || Integer.parseInt(repeatCnt)==0, ErrorMsgEnum.REPEAT_COUNT_ERR_MSG);
         } catch(IllegalArgumentException e) {
             System.out.println(e.toString());
             return false;
