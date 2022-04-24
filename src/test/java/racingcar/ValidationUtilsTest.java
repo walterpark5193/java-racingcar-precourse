@@ -15,6 +15,7 @@ public class ValidationUtilsTest {
         assertThat(new ValidationUtils().validName("pobi")).isTrue();
         assertThat(new ValidationUtils().validName("pobi,java")).isTrue();
         assertThat(new ValidationUtils().validName("pobi,javaji")).isFalse();
+        assertThat(new ValidationUtils().validName("pobi,java,pobi")).isFalse();
         assertThat(new ValidationUtils().validName("")).isFalse();
         assertThat(new ValidationUtils().validName(",")).isFalse();
         assertThat(new ValidationUtils().validName(",,,")).isFalse();
