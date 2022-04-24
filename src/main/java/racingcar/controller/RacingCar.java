@@ -17,13 +17,14 @@ public class RacingCar {
     }
 
     private void initGameInfo() {
+        ValidationUtils validationUtils = new ValidationUtils();
         do {
             this.userInputCarNames = InputView.getCarsNameInput();
-        } while (!new ValidationUtils().validName(userInputCarNames));
+        } while (!validationUtils.validName(userInputCarNames));
 
         do {
             playRepeatCount = InputView.getPlayRepeatInput();
-        } while (!ValidationUtils.validRepeat(playRepeatCount));
+        } while (!validationUtils.validRepeat(playRepeatCount));
     }
 
     public void makeCarInfoList() {
