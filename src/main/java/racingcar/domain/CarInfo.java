@@ -1,16 +1,15 @@
 package racingcar.domain;
 
 import racingcar.utils.GenerateRandomNumUtils;
+import racingcar.utils.ValidNumberConditionEnum;
 
 public class CarInfo {
-    public static final int MIN_VALUE = 0;
-    public static final int MOVING_FORWARD = 4;
     private String name;
     private int forwardCount;
 
     public CarInfo(String carName){
         this.name = carName;
-        this.forwardCount = MIN_VALUE;
+        this.forwardCount = ValidNumberConditionEnum.MIN_VALUE.getValue();
     }
 
     public String getName() {
@@ -36,7 +35,7 @@ public class CarInfo {
     }
 
     private boolean isForward() {
-        return generateRandomForwardNum() >= MOVING_FORWARD;
+        return generateRandomForwardNum() >= ValidNumberConditionEnum.MOVING_FORWARD.getValue();
     }
 
     private int generateRandomForwardNum() {

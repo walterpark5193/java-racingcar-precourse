@@ -1,5 +1,7 @@
 package racingcar.domain;
 
+import racingcar.utils.ValidCommonConditionEnum;
+import racingcar.utils.ValidNumberConditionEnum;
 import racingcar.view.OutputView;
 
 import java.util.ArrayList;
@@ -7,7 +9,6 @@ import java.util.List;
 
 
 public class ManageCar {
-    public static final String DELIMITER = ",";
     private List<CarInfo> carInfoList;
     private int playRepeatCnt;
     private int highScore;
@@ -23,13 +24,13 @@ public class ManageCar {
     private void clearGameInfo() {
         carInfoList = new ArrayList<>();
         winnerList = new ArrayList<>();
-        highScore = Integer.MIN_VALUE;
+        highScore = ValidNumberConditionEnum.MIN_VALUE.getValue();
     }
 
     private void createCar(String userInputCarNames) {
         //1. 자동차 입력받는 기능 구현 완료
         //Validation 완료 후 실제 자동차 객체 생성
-        for (String name : userInputCarNames.split(DELIMITER)) {
+        for (String name : userInputCarNames.split(ValidCommonConditionEnum.DELIMITER.getValue())) {
             this.carInfoList.add(new CarInfo(name));
         }
     }
