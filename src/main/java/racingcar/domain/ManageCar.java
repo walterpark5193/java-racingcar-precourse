@@ -35,8 +35,32 @@ public class ManageCar {
         }
     }
 
+    public List<CarInfo> getCarInfoList(){
+        return this.carInfoList;
+    }
+
     public void setCarInfoList(List<CarInfo> carInfoList) {
         this.carInfoList = carInfoList;
+    }
+
+    public CarInfo getCarInfo(int i) {
+        return this.carInfoList.get(i);
+    }
+
+    public List<String> getWinnerList() {
+        return winnerList;
+    }
+
+    public void setWinnerList(List<String> winnerList) {
+        this.winnerList = winnerList;
+    }
+
+    public int getHighScore() {
+        return highScore;
+    }
+
+    public void setHighScore(int highScore) {
+        this.highScore = highScore;
     }
 
     public void playGame() {
@@ -52,7 +76,7 @@ public class ManageCar {
         OutputView.printWinnerMsg(winnerList);
     }
 
-    private void getWinnerInfo(List<String> winnerList, CarInfo carInfo) {
+    public void getWinnerInfo(List<String> winnerList, CarInfo carInfo) {
         //6. 가장 많이 전진한 자동차의 스코어 구하는 로직
         //7. 우승자 List 구하는 로직
         if (carInfo.getForwardCount() >= highScore) {
@@ -68,7 +92,7 @@ public class ManageCar {
         this.highScore = score;
     }
 
-    private void carMoveForward() {
+    public void carMoveForward() {
         //0~9사이의 랜덤 숫자 생성하는 로직
         //4이상일 시 전진대상으로 판단하는 로직
         //콜렉션 개체의 전진카운트 증가시키는 로직
@@ -81,7 +105,7 @@ public class ManageCar {
         OutputView.printCurrentResultMsg();
     }
 
-    private void printCurrentPoint() {
+    public void printCurrentPoint() {
         //5. 현재 누적된 경주 결과 출력하는 로직
         for (CarInfo carInfo : carInfoList) {
             OutputView.printCurrentPoint(carInfo);

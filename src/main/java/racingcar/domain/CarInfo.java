@@ -30,8 +30,12 @@ public class CarInfo {
 
     public void moveForward(){
         if (isForward()) {
-            this.setForwardCount(this.getForwardCount()+1);
+            moveCurrentPoint(this.getForwardCount()+1);
         }
+    }
+
+    public void moveCurrentPoint(int point) {
+        this.setForwardCount(point);
     }
 
     private boolean isForward() {

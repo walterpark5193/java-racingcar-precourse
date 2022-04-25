@@ -40,7 +40,7 @@ public class ValidationUtils extends IllegalArgumentException{
     }
 
     private void validNameLength(List<String> nameList) {
-        for (String name : nameList) {
+            for (String name : nameList) {
             validNameZeroValue(name);
             validNameMaxLength(name);
         }
